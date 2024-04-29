@@ -11,6 +11,9 @@
 		27067B682BDC7679001563E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B672BDC7679001563E7 /* ContentView.swift */; };
 		27067B6A2BDC767C001563E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27067B692BDC767C001563E7 /* Assets.xcassets */; };
 		27067B6D2BDC767C001563E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27067B6C2BDC767C001563E7 /* Preview Assets.xcassets */; };
+		27067B7B2BDCB150001563E7 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B7A2BDCB150001563E7 /* Recorder.swift */; };
+		27067B7D2BDCB353001563E7 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B7C2BDCB353001563E7 /* MotionManager.swift */; };
+		27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B812BE00232001563E7 /* AuthorizationChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,10 @@
 		27067B672BDC7679001563E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		27067B692BDC767C001563E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27067B6C2BDC767C001563E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		27067B7A2BDCB150001563E7 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		27067B7C2BDCB353001563E7 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		27067B802BE00136001563E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		27067B812BE00232001563E7 /* AuthorizationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +58,11 @@
 		27067B642BDC7679001563E7 /* EasyInterview */ = {
 			isa = PBXGroup;
 			children = (
+				27067B802BE00136001563E7 /* Info.plist */,
 				27067B652BDC7679001563E7 /* EasyInterviewApp.swift */,
 				27067B672BDC7679001563E7 /* ContentView.swift */,
+				27067B762BDCAF4F001563E7 /* Recording */,
+				27067B772BDCAF67001563E7 /* Warnings */,
 				27067B692BDC767C001563E7 /* Assets.xcassets */,
 				27067B6B2BDC767C001563E7 /* Preview Content */,
 			);
@@ -65,6 +75,48 @@
 				27067B6C2BDC767C001563E7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		27067B742BDC76B6001563E7 /* Motion */ = {
+			isa = PBXGroup;
+			children = (
+				27067B7C2BDCB353001563E7 /* MotionManager.swift */,
+			);
+			name = Motion;
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		27067B752BDC76CA001563E7 /* Face Detection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Face Detection";
+			sourceTree = "<group>";
+		};
+		27067B762BDCAF4F001563E7 /* Recording */ = {
+			isa = PBXGroup;
+			children = (
+				27067B812BE00232001563E7 /* AuthorizationChecker.swift */,
+				27067B7A2BDCB150001563E7 /* Recorder.swift */,
+			);
+			path = Recording;
+			sourceTree = "<group>";
+		};
+		27067B772BDCAF67001563E7 /* Warnings */ = {
+			isa = PBXGroup;
+			children = (
+				27067B832BE04D67001563E7 /* Audio ML */,
+				27067B752BDC76CA001563E7 /* Face Detection */,
+				27067B742BDC76B6001563E7 /* Motion */,
+			);
+			path = Warnings;
+			sourceTree = "<group>";
+		};
+		27067B832BE04D67001563E7 /* Audio ML */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Audio ML";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +189,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27067B7D2BDCB353001563E7 /* MotionManager.swift in Sources */,
 				27067B682BDC7679001563E7 /* ContentView.swift in Sources */,
 				27067B662BDC7679001563E7 /* EasyInterviewApp.swift in Sources */,
+				27067B7B2BDCB150001563E7 /* Recorder.swift in Sources */,
+				27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +325,9 @@
 				DEVELOPMENT_TEAM = 9XTYLQ64BB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EasyInterview/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app records videos.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app records videos with audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +357,9 @@
 				DEVELOPMENT_TEAM = 9XTYLQ64BB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EasyInterview/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app records videos.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app records videos with audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
