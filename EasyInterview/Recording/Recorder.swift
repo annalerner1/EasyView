@@ -5,8 +5,8 @@
 //  Created by Anna Lerner on 4/26/24.
 //
 
-import Foundation
 import AVFoundation
+import Photos
 
 class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject {
     
@@ -16,22 +16,64 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     private let movieOutput = AVCaptureMovieFileOutput()
     
     override init() {
-        Task(priority: .background) {
+        super .init()
+        Task(priority: .high) {
             if await AuthorizationChecker().checkAuthStatus() {
-                // deal with permission allows
+                addAudioInput()
+                addVideoInput()
             } else {
                 // deal with permissions denied
             }
         }
     }
     
-    func startRecording() {
+    
+    private func addAudioInput() {
+        guard let device = AVCaptureDevice.default(for: .audio) else {
+            return // throw error instead
+        }
+        guard let input = try? AVCaptureDeviceInput(device: device) else {
+            return // throw error instead
+        }
+        if session.canAddInput(input) {
+            session.addInput(input)
+        }
+        
+    }
+    
+    private func addVideoInput() {
+        guard let device = AVCaptureDevice.default(for: .video) else {
+            return // throw error instead
+        }
+        guard let input = try? AVCaptureDeviceInput(device: device) else {
+            return // throw error instead
+        }
+        if session.canAddInput(input) {
+            session.addInput(input)
+        }
+        
+    }
+    
+    private func addFileOutput() {
         guard session.canAddOutput(movieOutput) else {
-            // need to add specific error later
             return
         }
-        session
-            .addOutput(movieOutput)
+        session.addOutput(movieOutput)
+    }
+    
+    
+    func startRecording() {
+        if !self.isRecording {
+            isRecording = true
+            session.startRunning()
+        }
+    }
+    
+    func stopRecording() {
+        if self.isRecording {
+            session.stopRunning()
+            isRecording = false
+        }
     }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
@@ -39,7 +81,14 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
             // some problem with saving video file
             print(error)
         }
-        //add code to save file
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
+            
+        }) { _, error in
+            if let error = error {
+                // error saving video, print something
+            }
+        }
     }
     
 }

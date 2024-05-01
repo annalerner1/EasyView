@@ -12,7 +12,7 @@ struct AuthorizationChecker {
     
     func checkAuthStatus() async -> Bool {
         let videoStatus = AVCaptureDevice.authorizationStatus(for: .video)
-        let audioStatus = AVCaptureDevice.authorizationStatus(for: .audio) // not sure if i need to include audio too? will test later
+        let audioStatus = AVCaptureDevice.authorizationStatus(for: .audio)
         var vidAuth = videoStatus == .authorized
         var audAuth = audioStatus == .authorized
         
