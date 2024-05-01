@@ -332,6 +332,7 @@
 				INFOPLIST_FILE = EasyInterview/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app records videos.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app records videos with audio";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs to save videos to the users camera role";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -364,6 +365,7 @@
 				INFOPLIST_FILE = EasyInterview/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app records videos.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app records videos with audio";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs to save videos to the users camera role";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

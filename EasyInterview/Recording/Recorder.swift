@@ -17,12 +17,20 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     
     override init() {
         super .init()
-        Task(priority: .high) {
+        Task(priority: .background) {
             if await AuthorizationChecker().checkAuthStatus() {
                 addAudioInput()
                 addVideoInput()
+                
+                if session.canAddOutput(movieOutput) {
+                    session.addOutput(movieOutput)
+                } else {
+                    print("Could not add movie output")
+                }
+                
+                self.session.startRunning()
             } else {
-                // deal with permissions denied
+                print("Authorization not working")
             }
         }
     }
@@ -64,21 +72,33 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     
     func startRecording() {
         if !self.isRecording {
-            isRecording = true
-            session.startRunning()
-        }
+            guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("easyinterview.mp4") else {
+                print("error generating url for user")
+                return
+                
+            }
+            if FileManager.default.fileExists(atPath: url.path) {
+                try? FileManager.default.removeItem(at: url)
+            }
+                movieOutput.startRecording(to: url, recordingDelegate: self)
+                self.isRecording = true
+                }
     }
     
     func stopRecording() {
         if self.isRecording {
-            session.stopRunning()
-            isRecording = false
+            Task(priority: .background) {
+                movieOutput.stopRecording()
+                DispatchQueue.main.async {
+                    self.isRecording = false
+                }
+            }
+        
         }
     }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         if let error = error {
-            // some problem with saving video file
             print(error)
         }
         PHPhotoLibrary.shared().performChanges({

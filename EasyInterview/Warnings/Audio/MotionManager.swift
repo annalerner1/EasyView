@@ -10,7 +10,7 @@ import CoreMotion
 
 class MotionManager: ObservableObject {
     let motion = CMMotionManager()
-    var timer = Timer() // not sure if this is the proper way
+    private var timer = Timer() // not sure if this is the proper way
     @Published var warning = false // need to modify this if problem with data
     
     func startAccelerometersAndGyroscope() {
@@ -40,4 +40,5 @@ class MotionManager: ObservableObject {
         })
         
     }
+    // need to add a stop for when no longer cording
 }

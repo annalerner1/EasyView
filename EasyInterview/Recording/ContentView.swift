@@ -18,6 +18,9 @@ struct ContentView: View {
                 PreviewView(session: $recorder.session)
                     .clipped()
                     .cornerRadius(10)
+                    .onAppear {
+                        print("Preview View appeared")
+                    }
             }
             HStack {
                 if !recorder.isRecording {
