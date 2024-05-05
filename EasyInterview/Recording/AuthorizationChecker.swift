@@ -19,13 +19,13 @@ struct AuthorizationChecker {
         if videoStatus == .notDetermined {
             vidAuth = await AVCaptureDevice.requestAccess(for: .video)
         } else if videoStatus == .denied {
-            // need to alert user to go to settings
+            print("user needs to go to settings") // maybe add this?
         }
             
         if audioStatus == .notDetermined {
             audAuth = await AVCaptureDevice.requestAccess(for: .audio)
         } else if audioStatus == .denied {
-            // need to alert user to go to settings
+            print("user needs to go to settings") // maybe add this?
         }
         
             

@@ -7,17 +7,26 @@
 
 import AVFoundation
 import Photos
+import Vision
 
 class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject {
     
+    //capture attributes
     @Published var session = AVCaptureSession()
     @Published var isRecording = false
     
     private let movieOutput = AVCaptureMovieFileOutput()
     
+    // face detection attributes
+    private let faceDetectionRequest = VNDetectFaceRectanglesRequest()
+    private var faceDetectionHandler: VNSequenceRequestHandler?
+    
     override init() {
         super .init()
+        faceDetectionHandler = VNSequenceRequestHandler()
+
         Task(priority: .background) {
+
             if await AuthorizationChecker().checkAuthStatus() {
                 addAudioInput()
                 addVideoInput()
@@ -59,6 +68,14 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         if session.canAddInput(input) {
             session.addInput(input)
         }
+        // new stuff
+        let output = AVCaptureVideoDataOutput()
+            output.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+            if session.canAddOutput(output) {
+                session.addOutput(output)
+            } else {
+                print("Could not add video data output")
+            }
         
     }
     
@@ -82,7 +99,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
             }
                 movieOutput.startRecording(to: url, recordingDelegate: self)
                 self.isRecording = true
-                }
+            }
     }
     
     func stopRecording() {
@@ -103,7 +120,6 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         }
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
-            
         }) { _, error in
             if let error = error {
                 // error saving video, print something
@@ -111,4 +127,39 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         }
     }
     
+}
+
+
+extension Recorder: AVCaptureVideoDataOutputSampleBufferDelegate {
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+
+        do {
+            let request = VNDetectFaceRectanglesRequest {request, error in
+                if let error = error {
+                    print("Error performing face detection: \(error)")
+                    return
+                }
+                
+                guard let results = request.results as? [VNFaceObservation] else {
+                    // need to throw an error here
+                    return
+                }
+                
+                if results.isEmpty {
+                    print("No face detected")
+                    // need to display a warning that the person is not in frame
+                } else {
+                    print("Face detected")
+                        
+                }
+            }
+            
+            try faceDetectionHandler?.perform([request], on: pixelBuffer)
+        } catch {
+            print("Error performing face detection")
+        }
+    }
 }

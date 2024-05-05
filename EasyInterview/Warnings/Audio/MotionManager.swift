@@ -30,11 +30,12 @@ class MotionManager: ObservableObject {
                 let y = accelerometerDate.acceleration.y
                 let z = accelerometerDate.acceleration.z
                 // need to do something with this data
+                print("acclo data is x: \(x), y: \(y), z: \(z)")
             }
             
             if let gyroscopeDate = self.motion.gyroData {
                 let rotoRate = gyroscopeDate.rotationRate
-                
+                print("gyro data is: \(rotoRate)")
                 // need to do something with the data as well
             }
         })

@@ -15,6 +15,7 @@
 		27067B7D2BDCB353001563E7 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B7C2BDCB353001563E7 /* MotionManager.swift */; };
 		27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B812BE00232001563E7 /* AuthorizationChecker.swift */; };
 		27067B872BE15E55001563E7 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B862BE15E55001563E7 /* PreviewView.swift */; };
+		27067B892BE48294001563E7 /* SequenceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B882BE48294001563E7 /* SequenceHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		27067B802BE00136001563E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		27067B812BE00232001563E7 /* AuthorizationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationChecker.swift; sourceTree = "<group>"; };
 		27067B862BE15E55001563E7 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		27067B882BE48294001563E7 /* SequenceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		27067B752BDC76CA001563E7 /* Face Detection */ = {
 			isa = PBXGroup;
 			children = (
+				27067B882BE48294001563E7 /* SequenceHandler.swift */,
 			);
 			path = "Face Detection";
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				27067B7D2BDCB353001563E7 /* MotionManager.swift in Sources */,
 				27067B682BDC7679001563E7 /* ContentView.swift in Sources */,
 				27067B662BDC7679001563E7 /* EasyInterviewApp.swift in Sources */,
+				27067B892BE48294001563E7 /* SequenceHandler.swift in Sources */,
 				27067B7B2BDCB150001563E7 /* Recorder.swift in Sources */,
 				27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */,
 				27067B872BE15E55001563E7 /* PreviewView.swift in Sources */,

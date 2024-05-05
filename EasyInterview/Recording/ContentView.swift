@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 
-
 struct ContentView: View {
     @StateObject private var recorder = Recorder()
     
@@ -34,6 +33,7 @@ struct ContentView: View {
                         recorder.stopRecording()
                     } label: {
                         Text("Stop Recording")
+                            .tint(.red)
                     }
                 }
                 
