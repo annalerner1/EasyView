@@ -10,8 +10,10 @@ import AVFoundation
 
 struct ContentView: View {
     @StateObject private var recorder = Recorder()
+    @State private var warnings = ["hi"]
     
     var body: some View {
+        WarningView(warnings: $warnings)
         VStack {
             VStack {
                 PreviewView(session: $recorder.session)

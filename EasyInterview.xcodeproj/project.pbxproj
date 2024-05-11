@@ -16,6 +16,7 @@
 		27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B812BE00232001563E7 /* AuthorizationChecker.swift */; };
 		27067B872BE15E55001563E7 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B862BE15E55001563E7 /* PreviewView.swift */; };
 		27067B892BE48294001563E7 /* SequenceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B882BE48294001563E7 /* SequenceHandler.swift */; };
+		278B38D32BEFD29C0093D547 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B38D22BEFD29C0093D547 /* WarningView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		27067B812BE00232001563E7 /* AuthorizationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationChecker.swift; sourceTree = "<group>"; };
 		27067B862BE15E55001563E7 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		27067B882BE48294001563E7 /* SequenceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceHandler.swift; sourceTree = "<group>"; };
+		278B38D22BEFD29C0093D547 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		27067B772BDCAF67001563E7 /* Warnings */ = {
 			isa = PBXGroup;
 			children = (
+				278B38D22BEFD29C0093D547 /* WarningView.swift */,
 				27067B832BE04D67001563E7 /* Audio ML */,
 				27067B752BDC76CA001563E7 /* Face Detection */,
 				27067B742BDC76B6001563E7 /* Motion */,
@@ -200,6 +203,7 @@
 				27067B662BDC7679001563E7 /* EasyInterviewApp.swift in Sources */,
 				27067B892BE48294001563E7 /* SequenceHandler.swift in Sources */,
 				27067B7B2BDCB150001563E7 /* Recorder.swift in Sources */,
+				278B38D32BEFD29C0093D547 /* WarningView.swift in Sources */,
 				27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */,
 				27067B872BE15E55001563E7 /* PreviewView.swift in Sources */,
 			);

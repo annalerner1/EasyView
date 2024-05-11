@@ -11,13 +11,11 @@ import Vision
 
 class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject {
     
-    //capture attributes
     @Published var session = AVCaptureSession()
     @Published var isRecording = false
     
     private let movieOutput = AVCaptureMovieFileOutput()
     
-    // face detection attributes
     private let faceDetectionRequest = VNDetectFaceRectanglesRequest()
     private var faceDetectionHandler: VNSequenceRequestHandler?
     
