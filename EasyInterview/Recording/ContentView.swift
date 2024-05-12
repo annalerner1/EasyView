@@ -10,39 +10,59 @@ import AVFoundation
 
 struct ContentView: View {
     @StateObject private var recorder = Recorder()
-    @State private var warnings = ["hi"]
+    // @StateObject private var motionManager = MotionManager()
+    @State private var warnings: [String] = []
     
     var body: some View {
-        WarningView(warnings: $warnings)
-        VStack {
+        ZStack {
             VStack {
-                PreviewView(session: $recorder.session)
-                    .clipped()
-                    .cornerRadius(10)
-                    .onAppear {
-                        print("Preview View appeared")
-                    }
-            }
-            HStack {
-                if !recorder.isRecording {
-                    Button {
-                        recorder.startRecording()
-                    } label: {
-                        Text("Start Recording")
-                    }
-                } else {
-                    Button {
-                        recorder.stopRecording()
-                    } label: {
-                        Text("Stop Recording")
-                            .tint(.red)
-                    }
+                VStack {
+                    PreviewView(session: $recorder.session)
+                        .clipped()
+                        .cornerRadius(10)
+                        .onAppear {
+                            print("Preview View appeared")
+                        }
                 }
-                
-
+                HStack {
+                    if !recorder.isRecording {
+                        Button {
+                            recorder.startRecording()
+                        } label: {
+                            Image(systemName: "record.circle")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.blue)
+                                
+                        }
+                    } else {
+                        Button {
+                            recorder.stopRecording()
+                        } label: {
+                            Image(systemName: "stop.circle")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    
+                    
+                }
+            }
+            .padding()
+            if recorder.isRecording {
+                WarningView(warnings: $warnings)
             }
         }
-        .padding()
+        
+        .onChange(of: recorder.faceNotInFrame) { faceNotInFrame in
+                    if faceNotInFrame {
+                        warnings.append("Face not detected in frame")
+                    } else {
+                        warnings.removeAll(where: { $0 == "Face not detected in frame" })
+                    }
+                }
+         
     }
 }
 

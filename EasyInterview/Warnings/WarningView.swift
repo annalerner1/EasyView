@@ -13,7 +13,6 @@ struct WarningView: View {
         if !warnings.isEmpty {
             ZStack {
                 VStack {
-                    Spacer()
                     HStack {
                         Text("Warning:")
                             .foregroundColor(.red)
@@ -22,6 +21,9 @@ struct WarningView: View {
                         Text(warnings.joined(separator: ", "))
                             .foregroundColor(.red)
                     }
+                    .padding()
+                    Spacer()
+
                 }
                 .padding()
                 

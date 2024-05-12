@@ -13,6 +13,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     
     @Published var session = AVCaptureSession()
     @Published var isRecording = false
+    @Published var faceNotInFrame = false
     
     private let movieOutput = AVCaptureMovieFileOutput()
     
@@ -146,12 +147,8 @@ extension Recorder: AVCaptureVideoDataOutputSampleBufferDelegate {
                     return
                 }
                 
-                if results.isEmpty {
-                    print("No face detected")
-                    // need to display a warning that the person is not in frame
-                } else {
-                    print("Face detected")
-                        
+                DispatchQueue.main.async {
+                                self.faceNotInFrame = results.isEmpty
                 }
             }
             
