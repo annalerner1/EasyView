@@ -10,7 +10,7 @@ import AVFoundation
 
 struct ContentView: View {
     @StateObject private var recorder = Recorder()
-    // @StateObject private var motionManager = MotionManager()
+    @StateObject private var motionManager = MotionManager()
     @State private var warnings: [String] = []
     
     var body: some View {
