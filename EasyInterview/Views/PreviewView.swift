@@ -27,12 +27,10 @@ struct PreviewView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIView, context: Context) {
         if let layer = uiView.layer.sublayers?.first as? AVCaptureVideoPreviewLayer {
-              layer.session = session
+            layer.session = session
             layer.videoGravity = .resizeAspectFill
-              layer.frame = uiView.bounds
+            layer.frame = uiView.bounds
           }
-        print("preview view updated")
-        // maybe change something if user is record?
     }
 }
 

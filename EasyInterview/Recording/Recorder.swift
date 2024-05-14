@@ -134,27 +134,28 @@ extension Recorder: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-
-        do {
-            let request = VNDetectFaceRectanglesRequest {request, error in
-                if let error = error {
-                    print("Error performing face detection: \(error)")
-                    return
+        if self.isRecording { // only need to monitor face if recording
+            do {
+                let request = VNDetectFaceRectanglesRequest {request, error in
+                    if let error = error {
+                        print("Error performing face detection: \(error)")
+                        return
+                    }
+                    
+                    guard let results = request.results as? [VNFaceObservation] else {
+                        // need to throw an error here
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.faceNotInFrame = results.isEmpty
+                    }
                 }
                 
-                guard let results = request.results as? [VNFaceObservation] else {
-                    // need to throw an error here
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                                self.faceNotInFrame = results.isEmpty
-                }
+                try faceDetectionHandler?.perform([request], on: pixelBuffer)
+            } catch {
+                print("Error performing face detection")
             }
-            
-            try faceDetectionHandler?.perform([request], on: pixelBuffer)
-        } catch {
-            print("Error performing face detection")
         }
     }
 }

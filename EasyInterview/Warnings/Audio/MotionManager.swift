@@ -10,16 +10,15 @@ import CoreMotion
 
 class MotionManager: ObservableObject {
     let motion = CMMotionManager()
-    private var timer = Timer() // not sure if this is the proper way
+    private var timer = Timer()
     @Published var warning = false // need to modify this if problem with data
     
     init() {
         startAccelerometersAndGyroscope()
     }
+    
     func startAccelerometersAndGyroscope() {
-        print("inside function")
         if self.motion.isAccelerometerAvailable && self.motion.isGyroAvailable {
-            print("acceleo and gyro data avaible is avaible")
             self.motion.accelerometerUpdateInterval = 0.25 // right now checkign every 0.25 second
             self.motion.startAccelerometerUpdates()
             
@@ -32,14 +31,24 @@ class MotionManager: ObservableObject {
                     let x = accelerometerDate.acceleration.x
                     let y = accelerometerDate.acceleration.y
                     let z = accelerometerDate.acceleration.z
-                    // need to do something with this data
+
                     print("acclo data is x: \(x), y: \(y), z: \(z)")
+                    if x > 0.5 || y > 0.5 || z > 0.5 {
+                        self.warning = true
+                    } else {
+                        self.warning = false
+                    }
                 }
                 
                 if let gyroscopeDate = self.motion.gyroData {
                     let rotoRate = gyroscopeDate.rotationRate
                     print("gyro data is: \(rotoRate)")
-                    // need to do something with the data as well
+
+                    if rotoRate.x > 1.0 || rotoRate.y > 1.0 || rotoRate.z > 1.0 {
+                        self.warning = true
+                    } else {
+                        self.warning = false
+                    }
                 }
             })
             RunLoop.current.add(self.timer, forMode: .default)

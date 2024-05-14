@@ -62,6 +62,14 @@ struct ContentView: View {
                         warnings.removeAll(where: { $0 == "Face not detected in frame" })
                     }
                 }
+        .onChange(of: motionManager.warning) { warning in
+            if warning {
+                warnings.append("Shaky video quality")
+            } else {
+                warnings.removeAll(where: {$0 == "Shaky video quality"})
+                
+            }
+        }
          
     }
 }
