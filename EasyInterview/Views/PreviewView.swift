@@ -19,9 +19,7 @@ struct PreviewView: UIViewRepresentable {
         previewLayer.frame = view.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
-        print("preview view created")
-        
-        
+                
         return view
       }
     

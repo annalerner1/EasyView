@@ -126,6 +126,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         }
     }
     
+    
 }
 
 

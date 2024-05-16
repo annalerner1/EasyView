@@ -20,9 +20,6 @@ struct ContentView: View {
                     PreviewView(session: $recorder.session)
                         .clipped()
                         .cornerRadius(10)
-                        .onAppear {
-                            print("Preview View appeared")
-                        }
                 }
                 HStack {
                     if !recorder.isRecording {
@@ -57,9 +54,9 @@ struct ContentView: View {
         
         .onChange(of: recorder.faceNotInFrame) { faceNotInFrame in
                     if faceNotInFrame {
-                        warnings.append("Face not detected in frame")
+                        warnings.append("Face not detected")
                     } else {
-                        warnings.removeAll(where: { $0 == "Face not detected in frame" })
+                        warnings.removeAll(where: { $0 == "Face not detected" })
                     }
                 }
         .onChange(of: motionManager.warning) { warning in

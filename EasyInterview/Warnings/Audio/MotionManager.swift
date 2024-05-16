@@ -32,24 +32,27 @@ class MotionManager: ObservableObject {
                     let y = accelerometerDate.acceleration.y
                     let z = accelerometerDate.acceleration.z
 
-                    print("acclo data is x: \(x), y: \(y), z: \(z)")
-                    if x > 0.5 || y > 0.5 || z > 0.5 {
+                    // print("acclo data is x: \(x), y: \(y), z: \(z)")
+                    if x > 0.25 || y > 0.25 || z > 0.25 {
+                        print("bad accelo rate")
                         self.warning = true
                     } else {
-                        self.warning = false
+                        if let gyroscopeDate = self.motion.gyroData {
+                            let rotoRate = gyroscopeDate.rotationRate
+                            // print("gyro data is: \(rotoRate)")
+
+                            if rotoRate.x > 0.5 || rotoRate.y > 0.5 || rotoRate.z > 0.5 {
+                                print("bad roto rate")
+                                self.warning = true
+                            } else {
+                                self.warning = false
+                            }
+                        }
+                        // self.warning = false
                     }
                 }
                 
-                if let gyroscopeDate = self.motion.gyroData {
-                    let rotoRate = gyroscopeDate.rotationRate
-                    print("gyro data is: \(rotoRate)")
 
-                    if rotoRate.x > 1.0 || rotoRate.y > 1.0 || rotoRate.z > 1.0 {
-                        self.warning = true
-                    } else {
-                        self.warning = false
-                    }
-                }
             })
             RunLoop.current.add(self.timer, forMode: .default)
         }
