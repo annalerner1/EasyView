@@ -33,7 +33,7 @@ class MotionManager: ObservableObject {
                     let z = accelerometerDate.acceleration.z
 
                     // print("acclo data is x: \(x), y: \(y), z: \(z)")
-                    if x > 0.25 || y > 0.25 || z > 0.25 {
+                    if x > 0.5 || y > 0.5 || z > 0.5 {
                         print("bad accelo rate")
                         self.warning = true
                     } else {
@@ -41,7 +41,7 @@ class MotionManager: ObservableObject {
                             let rotoRate = gyroscopeDate.rotationRate
                             // print("gyro data is: \(rotoRate)")
 
-                            if rotoRate.x > 0.5 || rotoRate.y > 0.5 || rotoRate.z > 0.5 {
+                            if rotoRate.x > 0.7 || rotoRate.y > 0.7 || rotoRate.z > 0.7 {
                                 print("bad roto rate")
                                 self.warning = true
                             } else {

@@ -14,12 +14,13 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     @Published var session = AVCaptureSession()
     @Published var isRecording = false
     @Published var faceNotInFrame = false
+    @Published var frontCamera = true
     
     private let movieOutput = AVCaptureMovieFileOutput()
     
     private let faceDetectionRequest = VNDetectFaceRectanglesRequest()
     private var faceDetectionHandler: VNSequenceRequestHandler?
-    
+        
     override init() {
         super .init()
         faceDetectionHandler = VNSequenceRequestHandler()
@@ -58,14 +59,39 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     }
     
     private func addVideoInput() {
-        guard let device = AVCaptureDevice.default(for: .video) else {
-            return // throw error instead
+        session.beginConfiguration()
+        
+
+        var currentInput: AVCaptureDeviceInput?
+        for input in session.inputs {
+            if let deviceInput = input as? AVCaptureDeviceInput,
+               deviceInput.device.hasMediaType(.video) {
+                currentInput = deviceInput
+                break
+            }
         }
+        
+        if let unwrappedCurrentInput = currentInput {
+                session.removeInput(unwrappedCurrentInput)
+        }
+                
+   
+        let position: AVCaptureDevice.Position = frontCamera ? .front : .back
+           guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
+               print("No video device available")
+               session.commitConfiguration()
+               return
+           }
+        session.commitConfiguration()
+
+        
         guard let input = try? AVCaptureDeviceInput(device: device) else {
             return // throw error instead
         }
         if session.canAddInput(input) {
             session.addInput(input)
+        } else {
+            print("cannot add video input")
         }
         // new stuff
         let output = AVCaptureVideoDataOutput()
@@ -85,6 +111,12 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         session.addOutput(movieOutput)
     }
     
+    func switchCamera() {
+        self.frontCamera.toggle()
+        if session.isRunning {
+            self.addVideoInput()
+        }
+    }
     
     func startRecording() {
         if !self.isRecording {
@@ -112,6 +144,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         
         }
     }
+    
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         if let error = error {

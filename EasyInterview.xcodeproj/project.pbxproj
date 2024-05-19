@@ -19,6 +19,7 @@
 		27F950952BF58558009CB99A /* AudioStreamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F950942BF58558009CB99A /* AudioStreamManager.swift */; };
 		27F9509B2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 27F9509A2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel */; };
 		27F9509D2BF588B5009CB99A /* AudioStreamObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F9509C2BF588B5009CB99A /* AudioStreamObserver.swift */; };
+		27F9509F2BF595DB009CB99A /* BadSpeechClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 27F9509E2BF595DB009CB99A /* BadSpeechClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		27F950942BF58558009CB99A /* AudioStreamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStreamManager.swift; sourceTree = "<group>"; };
 		27F9509A2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BadSpeechClassifier3.mlmodel; sourceTree = "<group>"; };
 		27F9509C2BF588B5009CB99A /* AudioStreamObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStreamObserver.swift; sourceTree = "<group>"; };
+		27F9509E2BF595DB009CB99A /* BadSpeechClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BadSpeechClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				27F950942BF58558009CB99A /* AudioStreamManager.swift */,
 				27F9509C2BF588B5009CB99A /* AudioStreamObserver.swift */,
+				27F9509E2BF595DB009CB99A /* BadSpeechClassifier.mlmodel */,
 				27F9509A2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel */,
 			);
 			path = "Audio ML";
@@ -210,6 +213,7 @@
 				27067B7B2BDCB150001563E7 /* Recorder.swift in Sources */,
 				27F950952BF58558009CB99A /* AudioStreamManager.swift in Sources */,
 				278B38D32BEFD29C0093D547 /* WarningView.swift in Sources */,
+				27F9509F2BF595DB009CB99A /* BadSpeechClassifier.mlmodel in Sources */,
 				27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */,
 				27F9509B2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel in Sources */,
 				27F9509D2BF588B5009CB99A /* AudioStreamObserver.swift in Sources */,

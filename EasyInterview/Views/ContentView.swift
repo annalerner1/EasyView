@@ -11,20 +11,37 @@ import AVFoundation
 struct ContentView: View {
     @StateObject private var recorder = Recorder()
     @StateObject private var motionManager = MotionManager()
+    @ObservedObject private var audioStreamObserver = AudioStreamObserver()
+    
+    private var audioStreamManager = AudioStreamManager()
+    
     @State private var warnings: [String] = []
     
+    init() {
+        audioStreamManager.resultObservation(with: audioStreamObserver)
+    }
     var body: some View {
         ZStack {
             VStack {
                 VStack {
-                    PreviewView(session: $recorder.session)
-                        .clipped()
-                        .cornerRadius(10)
+                    ZStack {
+                        PreviewView(session: $recorder.session)
+                            .clipped()
+                            .cornerRadius(10)
+                        if !recorder.isRecording {
+                            Button {
+                                recorder.switchCamera()
+                            } label: {
+                                Text("testing testing")
+                            }
+                        }
+                    }
                 }
                 HStack {
                     if !recorder.isRecording {
                         Button {
                             recorder.startRecording()
+                            audioStreamManager.installTap()
                         } label: {
                             Image(systemName: "record.circle")
                                 .resizable()
@@ -35,6 +52,7 @@ struct ContentView: View {
                     } else {
                         Button {
                             recorder.stopRecording()
+                            audioStreamManager.removeTap()
                         } label: {
                             Image(systemName: "stop.circle")
                                 .resizable()
@@ -45,6 +63,10 @@ struct ContentView: View {
                     
                     
                 }
+                if recorder.isRecording {
+                                    Text("Classified Sound: \(audioStreamObserver.currentSound)")
+                                        .padding()
+                        }
             }
             .padding()
             if recorder.isRecording {
@@ -65,6 +87,13 @@ struct ContentView: View {
             } else {
                 warnings.removeAll(where: {$0 == "Shaky video quality"})
                 
+            }
+        }
+        .onChange(of: audioStreamObserver.warning) { warning in
+            if warning.isEmpty {
+                warnings.removeAll(where: {$0 == "Bad audio quality"}) // need to add specific wanring for 
+            } else {
+                warnings.append("Bad audio quality")
             }
         }
          
