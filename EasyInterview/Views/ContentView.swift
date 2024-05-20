@@ -28,11 +28,20 @@ struct ContentView: View {
                         PreviewView(session: $recorder.session)
                             .clipped()
                             .cornerRadius(10)
-                        if !recorder.isRecording {
-                            Button {
-                                recorder.switchCamera()
-                            } label: {
-                                Text("testing testing")
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                if !recorder.isRecording {
+                                    Button {
+                                        recorder.switchCamera()
+                                    } label: {
+                                        Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                            .resizable()
+                                            .frame(width: 30, height: 25)
+                                            .padding()
+                                    }
+                                }
                             }
                         }
                     }
@@ -63,6 +72,7 @@ struct ContentView: View {
                     
                     
                 }
+                // need to take this out
                 if recorder.isRecording {
                                     Text("Classified Sound: \(audioStreamObserver.currentSound)")
                                         .padding()
@@ -94,6 +104,12 @@ struct ContentView: View {
                 warnings.removeAll(where: {$0 == "Bad audio quality"}) // need to add specific wanring for 
             } else {
                 warnings.append("Bad audio quality")
+            }
+        }
+        .onChange(of: motionManager.direWarning) { direWarning in
+            if direWarning {
+                // play sound to let use know been too long
+                print("the tracking of shakiness is good, now you need to add audio")
             }
         }
          
