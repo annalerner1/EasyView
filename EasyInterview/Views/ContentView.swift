@@ -104,6 +104,11 @@ struct ContentView: View {
         }
         .onChange(of: motionManager.direWarning) { direWarning in
             if direWarning {
+                WarningSounds.playSound(file: "Motionwarning")
+            }
+        }
+        .onChange(of: audioStreamObserver.direWarning) { direWarning in
+            if direWarning {
                 WarningSounds.playSound(file: "Soundwarning")
             }
         }
