@@ -50,10 +50,13 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
             return // throw error instead
         }
         guard let input = try? AVCaptureDeviceInput(device: device) else {
+            print("trouble creating input")
             return // throw error instead
         }
         if session.canAddInput(input) {
             session.addInput(input)
+        } else {
+            print("cannot add input")
         }
         
     }
@@ -93,7 +96,9 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
         } else {
             print("cannot add video input")
         }
-        // new stuff
+        
+        
+        // for face detection
         let output = AVCaptureVideoDataOutput()
             output.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
             if session.canAddOutput(output) {
@@ -172,7 +177,7 @@ extension Recorder: AVCaptureVideoDataOutputSampleBufferDelegate {
             do {
                 let request = VNDetectFaceRectanglesRequest {request, error in
                     if let error = error {
-                        print("Error performing face detection: \(error)")
+                        print("\(error)")
                         return
                     }
                     
@@ -188,7 +193,7 @@ extension Recorder: AVCaptureVideoDataOutputSampleBufferDelegate {
                 
                 try faceDetectionHandler?.perform([request], on: pixelBuffer)
             } catch {
-                print("Error performing face detection")
+                print("error performing face detection")
             }
         }
     }

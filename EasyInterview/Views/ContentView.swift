@@ -15,7 +15,7 @@ struct ContentView: View {
     
     private var audioStreamManager = AudioStreamManager()
     
-    @State private var warnings: [String] = []
+    @State private var warnings: [String : String] = [:]
     
     init() {
         audioStreamManager.resultObservation(with: audioStreamObserver)
@@ -80,39 +80,41 @@ struct ContentView: View {
             }
             .padding()
             if recorder.isRecording {
-                WarningView(warnings: $warnings)
+                WarningView(warnings: .constant(Array(warnings.values)))
             }
         }
         
         .onChange(of: recorder.faceNotInFrame) { faceNotInFrame in
-                    if faceNotInFrame {
-                        warnings.append("Face not detected")
-                    } else {
-                        warnings.removeAll(where: { $0 == "Face not detected" })
-                    }
+            if faceNotInFrame {
+                updateWarning(warning: "Face not in frame", type: "FaceDetection")
+            } else {
+                updateWarning(warning: "", type: "FaceDetection")
+            }
                 }
         .onChange(of: motionManager.warning) { warning in
             if warning {
-                warnings.append("Shaky video quality")
+                updateWarning(warning: "Shaky video quality", type: "Motion")
             } else {
-                warnings.removeAll(where: {$0 == "Shaky video quality"})
+                updateWarning(warning: "", type: "Motion")
                 
             }
         }
         .onChange(of: audioStreamObserver.warning) { warning in
-            if warning.isEmpty {
-                warnings.removeAll(where: {$0 == "Bad audio quality"}) // need to add specific wanring for 
-            } else {
-                warnings.append("Bad audio quality")
-            }
+            updateWarning(warning: warning, type: "Audio")
         }
         .onChange(of: motionManager.direWarning) { direWarning in
             if direWarning {
-                // play sound to let use know been too long
-                print("the tracking of shakiness is good, now you need to add audio")
+                WarningSounds.playSound(file: "Soundwarning")
             }
         }
          
+    }
+    private func updateWarning(warning: String, type: String) {
+        if warning.isEmpty {
+            warnings.removeValue(forKey: type)
+        } else {
+            warnings[type] = warning
+        }
     }
 }
 

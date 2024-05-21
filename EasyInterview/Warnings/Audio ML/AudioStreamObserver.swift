@@ -27,8 +27,8 @@ class AudioStreamObserver: NSObject, SNResultsObserving, ObservableObject {
     }
     
     func checkWarnings() {
-        if self.currentSound != "Talking" && self.confidence > 0.7 { // need to test to determine confidence level
-            self.warning = currentSound
+        if self.currentSound != "Talking" && self.confidence > 0.7 {
+            self.warning = "Bad audio quality due to \(currentSound.lowercased())"
         } else {
             self.warning = ""
         }
