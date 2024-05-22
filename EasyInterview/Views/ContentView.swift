@@ -72,11 +72,7 @@ struct ContentView: View {
                     
                     
                 }
-                // need to take this out
-                if recorder.isRecording {
-                                    Text("Classified Sound: \(audioStreamObserver.currentSound)")
-                                        .padding()
-                        }
+        
             }
             .padding()
             if recorder.isRecording {
@@ -104,12 +100,14 @@ struct ContentView: View {
         }
         .onChange(of: motionManager.direWarning) { direWarning in
             if direWarning {
-                WarningSounds.playSound(file: "Motionwarning")
+                print("dire motion warning")
+                WarningSounds.playSound(file: "Motionwarning.m4a")
             }
         }
         .onChange(of: audioStreamObserver.direWarning) { direWarning in
             if direWarning {
-                WarningSounds.playSound(file: "Soundwarning")
+                print("dire sounds warning")
+                WarningSounds.playSound(file: "Soundwarning.m4a")
             }
         }
          

@@ -22,7 +22,7 @@ class WarningSounds {
         }
         
         func playSoundWarning(play: Bool) {
-            playSound(file: "Soundwarning")
+            playSound(file: "Soundwarning.m4a")
         }
         
         func playShakyWarning() {

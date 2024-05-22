@@ -36,7 +36,7 @@ class AudioStreamManager {
     
     private func setupClassifier() {
         let defaultConfig = MLModelConfiguration()
-        if let soundClassifier = try? BadSpeechClassifier(configuration: defaultConfig) {
+        if let soundClassifier = try? BadSpeechClassifier7(configuration: defaultConfig) {
             classifyRequest = try? SNClassifySoundRequest(mlModel: soundClassifier.model)
         }
     }

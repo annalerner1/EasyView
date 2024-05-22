@@ -16,6 +16,9 @@
 		27067B822BE00232001563E7 /* AuthorizationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B812BE00232001563E7 /* AuthorizationChecker.swift */; };
 		27067B872BE15E55001563E7 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27067B862BE15E55001563E7 /* PreviewView.swift */; };
 		270B8A8B2BFCFB3D00CCF7A8 /* WarningSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B8A8A2BFCFB3D00CCF7A8 /* WarningSounds.swift */; };
+		270B8A8E2BFDB26100CCF7A8 /* Soundwarning.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 270B8A8C2BFD2C2900CCF7A8 /* Soundwarning.m4a */; };
+		270B8A8F2BFDB26100CCF7A8 /* Motionwarning.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 270B8A8D2BFD2CAD00CCF7A8 /* Motionwarning.m4a */; };
+		270B8A912BFDB5C700CCF7A8 /* BadSpeechClassifier7.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 270B8A902BFDB5C700CCF7A8 /* BadSpeechClassifier7.mlmodel */; };
 		278B38D32BEFD29C0093D547 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B38D22BEFD29C0093D547 /* WarningView.swift */; };
 		27F950952BF58558009CB99A /* AudioStreamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F950942BF58558009CB99A /* AudioStreamManager.swift */; };
 		27F9509B2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 27F9509A2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel */; };
@@ -35,6 +38,9 @@
 		27067B812BE00232001563E7 /* AuthorizationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationChecker.swift; sourceTree = "<group>"; };
 		27067B862BE15E55001563E7 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		270B8A8A2BFCFB3D00CCF7A8 /* WarningSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSounds.swift; sourceTree = "<group>"; };
+		270B8A8C2BFD2C2900CCF7A8 /* Soundwarning.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Soundwarning.m4a; sourceTree = "<group>"; };
+		270B8A8D2BFD2CAD00CCF7A8 /* Motionwarning.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Motionwarning.m4a; sourceTree = "<group>"; };
+		270B8A902BFDB5C700CCF7A8 /* BadSpeechClassifier7.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BadSpeechClassifier7.mlmodel; sourceTree = "<group>"; };
 		278B38D22BEFD29C0093D547 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		27F950942BF58558009CB99A /* AudioStreamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStreamManager.swift; sourceTree = "<group>"; };
 		27F9509A2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BadSpeechClassifier3.mlmodel; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 				27F950942BF58558009CB99A /* AudioStreamManager.swift */,
 				27F9509C2BF588B5009CB99A /* AudioStreamObserver.swift */,
 				27F9509E2BF595DB009CB99A /* BadSpeechClassifier.mlmodel */,
+				270B8A902BFDB5C700CCF7A8 /* BadSpeechClassifier7.mlmodel */,
 				27F9509A2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel */,
 			);
 			path = "Audio ML";
@@ -144,6 +151,8 @@
 				27067B672BDC7679001563E7 /* ContentView.swift */,
 				27067B862BE15E55001563E7 /* PreviewView.swift */,
 				278B38D22BEFD29C0093D547 /* WarningView.swift */,
+				270B8A8C2BFD2C2900CCF7A8 /* Soundwarning.m4a */,
+				270B8A8D2BFD2CAD00CCF7A8 /* Motionwarning.m4a */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +215,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				270B8A8E2BFDB26100CCF7A8 /* Soundwarning.m4a in Resources */,
+				270B8A8F2BFDB26100CCF7A8 /* Motionwarning.m4a in Resources */,
 				27067B6D2BDC767C001563E7 /* Preview Assets.xcassets in Resources */,
 				27067B6A2BDC767C001563E7 /* Assets.xcassets in Resources */,
 			);
@@ -230,6 +241,7 @@
 				27F9509B2BF585EC009CB99A /* BadSpeechClassifier3.mlmodel in Sources */,
 				27F9509D2BF588B5009CB99A /* AudioStreamObserver.swift in Sources */,
 				27067B872BE15E55001563E7 /* PreviewView.swift in Sources */,
+				270B8A912BFDB5C700CCF7A8 /* BadSpeechClassifier7.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,11 @@ class AudioStreamObserver: NSObject, SNResultsObserving, ObservableObject {
     private var warningStart: Date?
     private var warningTimer = Timer()
     
-
+    override init() {
+        super.init()
+        startWarningTimer()
+    }
+    
     func request(_ request: SNRequest, didProduce result: SNResult) {
             if let result = result as? SNClassificationResult, let classification = result.classifications.first {
                         print("Classified Sound: \(classification.identifier)")
@@ -46,7 +50,7 @@ class AudioStreamObserver: NSObject, SNResultsObserving, ObservableObject {
                 if self.warningStart == nil {
                     self.warningStart = Date()
                 } else if let startTime = self.warningStart {
-                    if Date().timeIntervalSince(startTime) >= 10 { // right now seeing if bad audio for 10 secs
+                    if Date().timeIntervalSince(startTime) >= 5 {
                         self.direWarning = true
                     }
                 }

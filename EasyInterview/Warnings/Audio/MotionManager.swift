@@ -71,7 +71,7 @@ class MotionManager: ObservableObject {
                 if self.warningStart == nil {
                     self.warningStart = Date()
                 } else if let startTime = self.warningStart {
-                    if Date().timeIntervalSince(startTime) >= 5 { // right now seeing if shaky for 5 secs
+                    if Date().timeIntervalSince(startTime) >= 3 { // right now seeing if shaky for 3 secs
                         self.direWarning = true
                     }
                 }
