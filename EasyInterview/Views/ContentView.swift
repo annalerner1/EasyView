@@ -101,13 +101,15 @@ struct ContentView: View {
         .onChange(of: motionManager.direWarning) { direWarning in
             if direWarning {
                 print("dire motion warning")
-                WarningSounds.playSound(file: "Motionwarning.m4a")
+                WarningSounds.playSound(file: "Motionwarning2.m4a")
             }
         }
         .onChange(of: audioStreamObserver.direWarning) { direWarning in
             if direWarning {
-                print("dire sounds warning")
-                WarningSounds.playSound(file: "Soundwarning.m4a")
+                if recorder.isRecording {
+                    print("dire sounds warning")
+                    WarningSounds.playSound(file: "Soundwarning2.m4a")
+                }
             }
         }
          

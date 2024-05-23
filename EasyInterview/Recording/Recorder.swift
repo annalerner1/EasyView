@@ -47,16 +47,17 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     
     private func addAudioInput() {
         guard let device = AVCaptureDevice.default(for: .audio) else {
-            return // throw error instead
+            print("cannot find audio for device")
+            return
         }
         guard let input = try? AVCaptureDeviceInput(device: device) else {
-            print("trouble creating input")
-            return // throw error instead
+            print("trouble creating input for audio")
+            return
         }
         if session.canAddInput(input) {
             session.addInput(input)
         } else {
-            print("cannot add input")
+            print("cannot add audio input")
         }
         
     }
@@ -159,7 +160,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
         }) { _, error in
             if let error = error {
-                // error saving video, print something
+               print(error)
             }
         }
     }
@@ -182,7 +183,7 @@ extension Recorder: AVCaptureVideoDataOutputSampleBufferDelegate {
                     }
                     
                     guard let results = request.results as? [VNFaceObservation] else {
-                        // need to throw an error here
+                        print("could properly cast face observations")
                         return
                     }
                     
