@@ -21,12 +21,5 @@ class WarningSounds {
             print("something wen't wrong loading the sound to play")
         }
         
-        func playSoundWarning(play: Bool) {
-            playSound(file: "Soundwarning.m4a")
-        }
-        
-        func playShakyWarning() {
-            playSound(file: "Shakywarning")
-        }
     }
 }
