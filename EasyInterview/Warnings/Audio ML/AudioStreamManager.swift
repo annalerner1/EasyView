@@ -41,21 +41,21 @@ class AudioStreamManager {
         }
     }
 
-    public func resultObservation(with observer: SNResultsObserving) {
+    func resultObservation(with observer: SNResultsObserving) {
         if let classifyRequest = classifyRequest {
             try? streamAnalyzer.add(classifyRequest, withObserver: observer)
         }
     }
 
-    public func installTap() {
-        engine.inputNode.installTap(onBus: inputBus, bufferSize: 1024, format: inputFormat, block: analyzeAudio(buffer:at:)) // may have to change buffer size in future
+    func installTap() {
+        engine.inputNode.installTap(onBus: inputBus, bufferSize: 1024, format: inputFormat, block: analyzeAudio(buffer:at:)) 
     }
 
-    public func removeTap() {
+    func removeTap() {
         engine.inputNode.removeTap(onBus: inputBus)
     }
 
-    public func analyzeAudio(buffer: AVAudioBuffer, at time: AVAudioTime) {
+    func analyzeAudio(buffer: AVAudioBuffer, at time: AVAudioTime) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.streamAnalyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
         }

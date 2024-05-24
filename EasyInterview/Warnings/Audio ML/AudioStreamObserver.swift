@@ -50,7 +50,7 @@ class AudioStreamObserver: NSObject, SNResultsObserving, ObservableObject {
                 if self.warningStart == nil {
                     self.warningStart = Date()
                 } else if let startTime = self.warningStart {
-                    if Date().timeIntervalSince(startTime) >= 4 {
+                    if Date().timeIntervalSince(startTime) >= 5 { // right now alerts audio quality if longer than 5 seconds
                         self.direWarning = true
                     }
                 }

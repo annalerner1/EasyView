@@ -17,9 +17,11 @@ struct WarningView: View {
                         Text("Warning:")
                             .foregroundColor(.red)
                             .bold()
+                            .font(.title2)
                         
                         Text(warnings.joined(separator: ", "))
                             .foregroundColor(.red)
+                            .font(.title2)
                     }
                     .padding()
                     Spacer()

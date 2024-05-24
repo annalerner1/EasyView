@@ -24,12 +24,12 @@ class MotionManager: ObservableObject {
     }
     
     func startAccelerometersAndGyroscope() {
-        if self.motion.isAccelerometerAvailable && self.motion.isGyroAvailable {
+        if self.motion.isAccelerometerAvailable {
             self.motion.accelerometerUpdateInterval = 0.5
             self.motion.startAccelerometerUpdates()
             
-            self.motion.gyroUpdateInterval = 0.5
-            self.motion.startGyroUpdates()
+            // self.motion.gyroUpdateInterval = 0.5
+            // self.motion.startGyroUpdates()
             
             
             self.timer = Timer(fire: Date(), interval: 0.5, repeats: true, block: { timer in
@@ -38,7 +38,7 @@ class MotionManager: ObservableObject {
                     let y = accelerometerDate.acceleration.y
                     let z = accelerometerDate.acceleration.z
 
-                    if x > 0.3 || y > 0.3 || z > 0.3 {
+                    if x > 0.15 || y > 0.15 || z > 0.15 {
                         print("bad accelo rate")
                         self.warning = true
                     } else {
@@ -72,7 +72,7 @@ class MotionManager: ObservableObject {
                 if self.warningStart == nil {
                     self.warningStart = Date()
                 } else if let startTime = self.warningStart {
-                    if Date().timeIntervalSince(startTime) >= 1.5 { // right now seeing if shaky for 2 secs
+                    if Date().timeIntervalSince(startTime) >= 1.5 { // right now seeing if shaky for 1.5 secs
                         self.direWarning = true
                     }
                 }

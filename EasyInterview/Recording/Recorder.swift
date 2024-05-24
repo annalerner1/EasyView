@@ -34,12 +34,12 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
                 if session.canAddOutput(movieOutput) {
                     session.addOutput(movieOutput)
                 } else {
-                    print("Could not add movie output")
+                    print("could not add movie output")
                 }
                 
                 self.session.startRunning()
             } else {
-                print("Authorization not working")
+                print("authorization not working")
             }
         }
     }
@@ -90,7 +90,8 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
 
         
         guard let input = try? AVCaptureDeviceInput(device: device) else {
-            return // throw error instead
+            print("could not add video input")
+            return
         }
         if session.canAddInput(input) {
             session.addInput(input)
